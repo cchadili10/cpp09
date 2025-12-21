@@ -1,0 +1,19 @@
+NAME = btc
+CPP = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = main.cpp BitcoinExchange.cpp
+OBJECTS = $(SRC:.cpp=.o)
+
+all: $(OBJECTS)
+	$(CPP) $(FLAGS) $(OBJECTS) -o $(NAME)
+
+%.o: %.cpp  BitcoinExchange.hpp
+	$(CPP) $(FLAGS) -c $< -o $@
+
+clean: 
+	rm -rf $(OBJECTS)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
