@@ -14,10 +14,12 @@ int main(int argc, char const *argv[])
     try
     {
         rpn_cal.check_input(arg);
+        std::cout << rpn_cal.ft_get_result() << std::endl;
+
     }
     catch(const std::exception& e)
     {
-        std::cerr << "Error" << '\n';
+        std::cerr << e.what() << '\n';
     }
     
 }

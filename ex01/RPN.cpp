@@ -11,26 +11,55 @@ RPN &RPN::operator=(const RPN &other)
 
 void RPN::check_input(std::string &arg)
 {
-    if (arg.at(0) < '0' || arg.at(0) > '9')
-        throw std::exception();
     std::stringstream ss(arg);
     std::string input;
 
     while (ss >> input)
     {
         if (input.size() != 1)
-            throw std::exception();
+            throw std::runtime_error("Error : not valid operator or number");
         else if(input.at(0) >= '0' && input.at(0) <= '9')
         {
             rpn.push(atoi(input.c_str()));
         }
         else if (input.at(0) == '+' || input.at(0) == '-' || input.at(0) == '*' || input.at(0) == '/')
         {
-    
+            if(rpn.size() < 2)
+                throw std::runtime_error("Error : The  operator needs two numbers, but there's only one number in the stack");
+            int index;
+            index = rpn.top();
+            rpn.pop();
+            switch (input.at(0))
+            {
+                case ('+'):
+                    rpn.top() = rpn.top() + index;
+                    break;
+                case ('-'):
+                    rpn.top() = rpn.top() - index;
+                    break;
+                case ('*'):
+                    rpn.top() = rpn.top() * index;
+                    break;
+                case ('/'):
+                    if (index == 0)
+                        throw std::runtime_error("Error : division by zero");
+                    rpn.top() = rpn.top() / index;
+                    break;
+                default:
+                    break;
+            }
         }
         else
-            throw std::exception();
+            throw std::runtime_error("Error : not valid operator or number");
     }
+    if (rpn.size() != 1)
+        throw std::runtime_error("Error : the expression is incomplete");
+    res = rpn.top();
+}
+
+int RPN::ft_get_result() const
+{
+    return res;
 }
 
 RPN::~RPN() {};

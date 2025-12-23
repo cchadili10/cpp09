@@ -12,8 +12,10 @@ class RPN
         RPN(const RPN &other);
         RPN &operator=(const RPN &other);
         std::stack<int> rpn;
+        int res;
     public:
         RPN();
+        int ft_get_result()const;
         void check_input(std::string &arg);
         ~RPN();
 };
