@@ -44,7 +44,8 @@ std::vector<int> PmergeMe::ft_set_jacobsthal_in_order(int size)
     order.push_back(1);
     for (size_t i = 1; i < jacob_generate.size(); i++)
     {
-        int holder = jacob_generate.at(i);
+        // int holder = jacob_generate.at(i);
+        int holder = std::min(jacob_generate[i], size - 1);
         int holder_order = jacob_generate.at(i - 1);
         while (holder_order < holder)
         {
@@ -52,23 +53,24 @@ std::vector<int> PmergeMe::ft_set_jacobsthal_in_order(int size)
             holder--;
         }
     }
-    order.push_back(0);
+    // order.push_back(0);  
     return order;
 }
-
-void PmergeMe::ft_splite_sort(std::vector<int> &winners)
+#include <algorithm>
+void PmergeMe::ft_splite_sort(std::vector<int> &arr)
 {
-    if(winners.size() == 1)
+    if(arr.size() == 1)
         return ;
 
     std::vector<int> winner;
     std::vector<int> loser;
+    int remain_number;
     bool has_remain = false;
 
-    for (size_t i = 0; i < array.size() - 1; i += 2)
+    for (size_t i = 0; i < arr.size() - 1; i += 2)
     {
-        int first = array.at(i);
-        int second = array.at(i + 1);
+        int first = arr.at(i);
+        int second = arr.at(i + 1);
 
         if (first >= second)
         {
@@ -81,16 +83,32 @@ void PmergeMe::ft_splite_sort(std::vector<int> &winners)
             loser.push_back(first);
         }
     }
-    if (array.size() % 2 == 1)
+    if (arr.size() % 2 == 1)
     {
-        remain_number = array[array.size() - 1];
+        remain_number = arr[arr.size() - 1];
         has_remain = true;
     }
     ft_splite_sort(winner);
 
     if(!loser.empty())
     {
-
+        winner.insert(winner.begin(), loser[0]);
+        if(loser.size() > 1)
+        {
+            std::vector<int> order = ft_set_jacobsthal_in_order(loser.size()-1);
+            for (size_t i = 0; i < order.size() ; i++)
+            {
+                size_t index = order[i];
+                std::vector<int>::iterator it = std::lower_bound(winner.begin(),winner.end(),loser[index]);
+                winner.insert(it,loser[index]);
+            }
+        }
+        
     }
-
+    if (has_remain)
+    {
+        std::vector<int>::iterator it = std::lower_bound(winner.begin(), winner.end(), remain_number);
+        winner.insert(it, remain_number);
+    }
+    arr = winner;
 }

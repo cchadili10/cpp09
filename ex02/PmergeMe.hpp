@@ -10,7 +10,7 @@ class PmergeMe
 private:
     PmergeMe(const PmergeMe &other);
     PmergeMe &operator=(const PmergeMe &other);
-    int remain_number;
+   
     
     public:
     
