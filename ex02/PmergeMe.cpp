@@ -9,6 +9,14 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 }
 PmergeMe::~PmergeMe() {}
 
+double getTimeInMicroseconds()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000000.0) + tv.tv_usec;
+}
+
+
 void PmergeMe::ft_pars(std::string arg)
 {
     for (size_t i = 0; i < arg.size(); i++)
@@ -25,6 +33,7 @@ void PmergeMe::ft_pars(std::string arg)
         throw std::runtime_error("Error");
     array.push_back(static_cast<int>(value));
     array_dq.push_back(static_cast<int>(value));
+    values_before.push_back(static_cast<int>(value));
     
 }
 

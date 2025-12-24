@@ -1,11 +1,12 @@
 #include "PmergeMe.hpp"
+#include <iomanip>
 
 
 int main(int argc, char const *argv[])
 {
     PmergeMe pgm;
 
-    if (argc == 0)
+    if (argc <= 1)
         return 1;
     try
     {
@@ -13,30 +14,29 @@ int main(int argc, char const *argv[])
         {
             pgm.ft_pars(argv[i]);
         }
+        double start = getTimeInMicroseconds();
         pgm.ft_splite_sort(pgm.array);
+        double end = getTimeInMicroseconds();
+        double res = end - start;
+
+        start = getTimeInMicroseconds();
         pgm.ft_splite_sort_deque(pgm.array_dq);
-    
-        std::cout << "\n";
+        end = getTimeInMicroseconds();
+        double res_dq = end - start;
+        std::cout << "Before:  ";
+        for (size_t i = 0; i < pgm.values_before.size(); i++)
+        {
+            std::cout << pgm.values_before[i] << " ";
+        }
+        std::cout <<std::endl << "After:   ";
         for (size_t i = 0; i < pgm.array.size(); i++)
         {
-            std::cout << pgm.array.at(i) << " ";
+            std::cout << pgm.array[i] << " ";
         }
-        std::cout << "\n";
-        for (size_t i = 0; i < pgm.array_dq.size(); i++)
-        {
-            std::cout << pgm.array_dq.at(i) << " ";
-        }
-        // bool sorted = true;
-        // for (size_t i = 1; i < pgm.array.size(); i++)
-        // {
-        //     if (pgm.array[i] < pgm.array[i-1])
-        //     {
-        //         sorted = false;
-        //         std::cout << "ERROR at position " << i << ": " << pgm.array[i-1] << " > " << pgm.array[i] << std::endl;
-        //     }
-        // }
-        // if (sorted)
-        //     std::cout << "\n Array is properly sorted!" << std::endl;
+        std::cout << std::fixed << std::setprecision(5);
+        std::cout <<std::endl << "Time to process a range of " << argc-1 << " elements with std::vector : "<< res << "us";
+        std::cout <<std::endl << "Time to process a range of "<<  argc-1 << " elements with std::vector : "<< res_dq << "us" << std::endl;
+    
     }
     catch(const std::exception& e)
     {
