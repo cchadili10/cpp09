@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
 {
     PmergeMe pgm;
 
-    if (argc <= 1)
+    if (argc == 1)
         return 1;
     try
     {
@@ -25,29 +25,18 @@ int main(int argc, char const *argv[])
         double res_dq = end - start;
         std::cout << "Before:  ";
         for (size_t i = 0; i < pgm.values_before.size(); i++)
-        {
             std::cout << pgm.values_before[i] << " ";
-        }
         std::cout <<std::endl << "After:   ";
         for (size_t i = 0; i < pgm.array.size(); i++)
-        {
             std::cout << pgm.array[i] << " ";
-        }
         std::cout << std::fixed << std::setprecision(5);
-        std::cout <<std::endl << "Time to process a range of " << argc-1 << " elements with std::vector : "<< res << "us";
-        std::cout <<std::endl << "Time to process a range of "<<  argc-1 << " elements with std::vector : "<< res_dq << "us" << std::endl;
+        std::cout <<std::endl << "Time to process a range of " << argc-1 << " elements with std::vector : "<< res << " us";
+        std::cout <<std::endl << "Time to process a range of "<<  argc-1 << " elements with std::vector : "<< res_dq << " us" << std::endl;
     
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
     }
-    // std::cout << std::endl;
-    // std::vector<int> order = ft_set_jacobsthal_in_order(argc -  1);
-    // for (size_t i = 0; i < order.size(); i++)
-    // {
-    //     std::cout <<  order.at(i) << " ";
-    // }
-
     return 0;
 }

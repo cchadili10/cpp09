@@ -13,10 +13,6 @@ class PmergeMe
     private:
         PmergeMe(const PmergeMe &other);
         PmergeMe &operator=(const PmergeMe &other);
-        double time_vector;
-        double time_deque;
-    
-        
         public:
         std::vector<int> values_before;
         std::vector<int> array;
