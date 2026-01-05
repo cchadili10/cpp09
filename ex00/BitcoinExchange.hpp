@@ -14,8 +14,8 @@ class BitcoinExchange
         std::map<std::string, double> bitcoin;
         std::string months[12];
         std::string days[12];
-        int check_value;
-        int check_data;
+        bool check_value;
+        bool check_data;
         
         public:
         ~BitcoinExchange();
