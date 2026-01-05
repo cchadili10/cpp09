@@ -11,11 +11,11 @@ class RPN
     private:
         RPN(const RPN &other);
         RPN &operator=(const RPN &other);
-        std::stack<int> rpn;
-        int res;
+        std::stack<double> rpn;
+        double res;
     public:
         RPN();
-        int ft_get_result()const;
+        double ft_get_result()const;
         void check_input(std::string &arg);
         ~RPN();
 };

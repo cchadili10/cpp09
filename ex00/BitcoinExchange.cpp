@@ -229,7 +229,6 @@ void BitcoinExchange::ft_checkInput_data(std::string line)
     std::string value_st, date;
     date = line.substr(0, index);
     value_st = line.substr(index + 1, line.size() - index);
-
     try
     {
         is_ValidDate(date, false);
@@ -241,7 +240,6 @@ void BitcoinExchange::ft_checkInput_data(std::string line)
         throw std::runtime_error("database corrupted");
     }
     bitcoin.insert(std::make_pair(date, value));
-
 }
 
 BitcoinExchange::~BitcoinExchange() {};

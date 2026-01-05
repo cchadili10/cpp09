@@ -4,7 +4,9 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp PmergeMe.cpp
 OBJECTS = $(SRC:.cpp=.o)
 
-all: $(OBJECTS)
+all: $(NAME)
+
+$(NAME) : $(OBJECTS)
 	$(CPP) $(FLAGS) $(OBJECTS) -o $(NAME)
 
 %.o: %.cpp  PmergeMe.hpp

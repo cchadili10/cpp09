@@ -11,42 +11,50 @@ RPN &RPN::operator=(const RPN &other)
 
 void RPN::check_input(std::string &arg)
 {
-    std::stringstream ss(arg);
-    std::string input;
-
-    while (ss >> input)
+    bool check = true;
+    for (size_t i = 0; i < arg.size(); i++)
     {
-        if (input.size() != 1)
-            throw std::runtime_error("Error : not valid operator or number");
-        else if(input.at(0) >= '0' && input.at(0) <= '9')
+        for (; i < arg.size(); i++)
         {
-            rpn.push(atoi(input.c_str()));
+            if (arg[i] == ' ' || arg[i] == '\t')
+                check = true;
+            if (arg[i] != ' ' && arg[i] != '\t')
+                break;
         }
-        else if (input.at(0) == '+' || input.at(0) == '-' || input.at(0) == '*' || input.at(0) == '/')
+        if(i == arg.size())
+            break ;
+        if ((arg[i] >= '0' && arg[i] <= '9') && (check))
         {
-            if(rpn.size() < 2)
-                throw std::runtime_error("Error : The  operator needs two numbers, but there's only one number in the stack");
-            int index;
+            check = false;
+            int value = arg[i] - '0';
+            rpn.push(value);
+        }
+        else if ((arg[i] == '+' || arg[i] == '-' || arg[i] == '*' || arg[i] == '/') && (check))
+        {
+            check = false;
+            if (rpn.size() < 2)
+                 throw std::runtime_error("Error : The  operator needs two numbers, but there's only one number in the stack");
+            double index;
             index = rpn.top();
             rpn.pop();
-            switch (input.at(0))
+            switch (arg[i])
             {
-                case ('+'):
-                    rpn.top() = rpn.top() + index;
-                    break;
-                case ('-'):
-                    rpn.top() = rpn.top() - index;
-                    break;
-                case ('*'):
-                    rpn.top() = rpn.top() * index;
-                    break;
-                case ('/'):
-                    if (index == 0)
-                        throw std::runtime_error("Error : division by zero");
-                    rpn.top() = rpn.top() / index;
-                    break;
-                default:
-                    break;
+            case ('+'):
+                rpn.top() = rpn.top() + index;
+                break;
+            case ('-'):
+                rpn.top() = rpn.top() - index;
+                break;
+            case ('*'):
+                rpn.top() = rpn.top() * index;
+                break;
+            case ('/'):
+                if (index == 0)
+                    throw std::runtime_error("Error : division by zero");
+                rpn.top() = rpn.top() / index;
+                break ;
+            default:
+                break ;
             }
         }
         else
@@ -57,7 +65,7 @@ void RPN::check_input(std::string &arg)
     res = rpn.top();
 }
 
-int RPN::ft_get_result() const
+double RPN::ft_get_result() const
 {
     return res;
 }

@@ -4,9 +4,11 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp RPN.cpp
 OBJECTS = $(SRC:.cpp=.o)
 
-all: $(OBJECTS)
-	$(CPP) $(FLAGS) $(OBJECTS) -o $(NAME)
+all: $(NAME)
 
+$(NAME) : $(OBJECTS)
+	$(CPP) $(FLAGS) $(OBJECTS) -o $(NAME)
+	
 %.o: %.cpp  RPN.hpp
 	$(CPP) $(FLAGS) -c $< -o $@
 
