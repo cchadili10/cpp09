@@ -115,7 +115,7 @@ void BitcoinExchange::is_ValidDate(std::string &line, bool check)
     bool is_leap = false;
 
     int year = atoi(year_.c_str());
-    if (year % 4 == 0 && year % 100 == 0 && year % 400 == 0)
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
         is_leap = true;
     
     if (day.size() > 2 || month.size() > 2)
