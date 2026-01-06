@@ -23,9 +23,9 @@ void PmergeMe::ft_pars(std::string arg)
     double value = atof(arg.c_str());
     if(value > INT_MAX || value == 0)
         throw std::runtime_error("Error");
-    array.push_back(static_cast<int>(value));
-    array_dq.push_back(static_cast<int>(value));
-    values_before.push_back(static_cast<int>(value));
+    array.push_back(value);
+    array_dq.push_back(value);
+    values_before.push_back(value);
     
 }
 
