@@ -9,13 +9,6 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 }
 PmergeMe::~PmergeMe() {}
 
-double getTimeInMicroseconds()
-{
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (tv.tv_sec * 1000000.0) + (tv.tv_usec / 1000.0);
-}
-
 void PmergeMe::ft_pars(std::string arg)
 {
     for (size_t i = 0; i < arg.size(); i++)
@@ -124,7 +117,8 @@ void PmergeMe::ft_splite_sort(std::vector<int> &arr)
         {
             size_t index = order[i];
             int value = sorted_pair[index].second;
-            std::vector<int>::iterator it = std::lower_bound(main_ch.begin(), main_ch.end(), value);
+            std::vector<int>::iterator limet_search = main_ch.begin() + std::min(index + i + 1 , main_ch.size());
+            std::vector<int>::iterator it = std::lower_bound(main_ch.begin(), limet_search, value);
             main_ch.insert(it, value);
         }
     }
@@ -224,7 +218,8 @@ void PmergeMe::ft_splite_sort_deque(std::deque<int> &arr)
         {
             size_t index = order[i];
             int value = sorted_pair[index].second;
-            std::deque<int>::iterator it = std::lower_bound(main_ch.begin(), main_ch.end(), value);
+            std::deque<int>::iterator limet_search = main_ch.begin() + std::min(index + i + 1, main_ch.size());
+            std::deque<int>::iterator it = std::lower_bound(main_ch.begin(), limet_search, value);
             main_ch.insert(it, value);
         }
     }
