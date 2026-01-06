@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RPN_HPP
+#define RPN_HPP
 
 #include <iostream>
 #include <exception>
@@ -16,6 +17,8 @@ class RPN
     public:
         RPN();
         double ft_get_result()const;
-        void check_input(std::string &arg);
+        void check_input(std::string arg);
         ~RPN();
 };
+
+#endif

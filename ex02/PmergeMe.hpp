@@ -1,4 +1,7 @@
-#pragma once
+#ifndef PMERGEME
+#define PMERGEME
+
+
 #include <iostream>
 #include <vector>
 #include <exception>
@@ -6,7 +9,6 @@
 #include <limits.h>
 #include <algorithm>
 #include <deque>
-#include <sys/time.h>
 #include <ctime>
 
 class PmergeMe
@@ -29,4 +31,4 @@ class PmergeMe
         std::deque <int> ft_set_jacobsthal_in_order_deque(int size);
 };
 
-double getTimeInMicroseconds();
+#endif

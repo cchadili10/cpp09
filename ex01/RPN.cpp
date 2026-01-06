@@ -9,7 +9,7 @@ RPN &RPN::operator=(const RPN &other)
     return *this;
 };
 
-void RPN::check_input(std::string &arg)
+void RPN::check_input(std::string arg)
 {
 
     std::string input;

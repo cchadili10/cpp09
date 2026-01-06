@@ -65,7 +65,6 @@ void PmergeMe::ft_splite_sort(std::vector<int> &arr)
 
     int remain_number;
     bool has_remain = false;
-    
 
     for (size_t i = 0; i < arr.size() - 1; i += 2) 
     {
@@ -84,9 +83,7 @@ void PmergeMe::ft_splite_sort(std::vector<int> &arr)
     }
 
     for (size_t i = 0; i < pairs.size(); i++)
-    {
         winner.push_back(pairs[i].first);
-    }
     
     ft_splite_sort(winner);
 

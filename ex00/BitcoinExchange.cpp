@@ -43,7 +43,7 @@ void ft_remove_spece(std::string &line, bool check)
     std::string err = "Error: bad input => ";
     if(check)
     {
-        if (line[0] == 32 || line[0] == 9)
+        if (isspace(line[0]))
             throw std::runtime_error(err);
         if (line[line.size() - 1] != 32)
             throw std::runtime_error(err);
@@ -66,8 +66,6 @@ void ft_remove_spece(std::string &line, bool check)
 void ft_is_valid_number(std::string line)
 {
     bool has_dot = false;
-    bool has_pos = false;
-    bool has_neg = false;
     for (size_t i = 0; i < line.size(); i++)
     {
         if (line.at(i) == '.')
@@ -80,12 +78,8 @@ void ft_is_valid_number(std::string line)
         {
             if (i != 0)
                 throw std::runtime_error("Error: bad input =>");
-            else if (has_neg || has_pos)
-                throw std::runtime_error("Error: bad input =>");
             else if (line.at(i) == '-')
                 throw std::range_error("Error: not a positive number.");
-            else
-                has_pos = true;
         }
         else if (line.at(i) < '0' || line.at(i) > '9')
             throw std::runtime_error("Error: bad input =>");
@@ -158,7 +152,7 @@ void BitcoinExchange::ft_checkInput(std::string line)
     if (line == "date | value" || line.empty())
     {
         if (line == "date | value" && check_value)
-            std::cout << "Error: bad input => " << line << std::endl;
+            std::cerr << "Error: bad input => " << line << std::endl;
         if (line == "date | value")
             check_value = true;
         return;
@@ -167,7 +161,7 @@ void BitcoinExchange::ft_checkInput(std::string line)
     size_t index = line.find('|');
     if (index == std::string::npos || std::count(line.begin(), line.end(), '|') != 1)
     {
-        std::cout << "Error: bad input => " << line << std::endl;
+        std::cerr << "Error: bad input => " << line << std::endl;
         return;
     }
     
@@ -242,7 +236,6 @@ void BitcoinExchange::ft_checkInput_data(std::string line)
     }
     catch (const std::exception &e)
     {
-        std::cerr << e.what() << " " << line << '\n';
         throw std::runtime_error("database corrupted");
     }
     bitcoin.insert(std::make_pair(date, value));
