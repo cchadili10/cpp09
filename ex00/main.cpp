@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
         std::string line, line_data;
         if (argc != 2)
         {
-            std::cerr << "Error: could not open file";
+            std::cerr << "Error: wrong number of arguments, btc takes the name of the file only." << std::endl;
             return 1;
         }
         std::ifstream file(argv[1]);

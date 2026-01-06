@@ -26,5 +26,5 @@ class BitcoinExchange
         void ft_checkInput(std::string line);
         void is_ValidDate(std::string &line, bool check);
         double is_ValidPrice(std::string line, bool check, bool check_data);
-        std::string ft_check_date(std::string &date, int i);
+        // std::string ft_check_date(std::string &date, int i);
 };

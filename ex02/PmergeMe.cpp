@@ -13,7 +13,7 @@ void PmergeMe::ft_pars(std::string arg)
 {
     for (size_t i = 0; i < arg.size(); i++)
     {
-        if (!isalnum(arg.at(i)))
+        if (!isdigit(arg.at(i)))
         {
             if ((arg.at(i) == '+' && i != 0) || arg.at(i) != '+' )
                 throw std::runtime_error("Error");

@@ -1,6 +1,22 @@
 #include "PmergeMe.hpp"
 #include <iomanip>
 
+// template<typename Container>
+// bool is_sorted(const Container& container) {
+//     // Empty or single-element containers are always sorted
+//     if (container.size() <= 1) {
+//         return true;
+//     }
+    
+//     // Check if each element is <= the next element
+//     for (size_t i = 0; i < container.size() - 1; ++i) {
+//         if (container[i] > container[i + 1]) {
+//             return false;
+//         }
+//     }
+    
+//     return true;
+// }
 
 int main(int argc, char const *argv[])
 {
@@ -32,7 +48,11 @@ int main(int argc, char const *argv[])
         std::cout << std::fixed << std::setprecision(5);
         std::cout <<std::endl << "Time to process a range of " << argc - 1 << " elements with std::vector : "<< res_vec << " us";
         std::cout <<std::endl << "Time to process a range of "<<  argc - 1 << " elements with std::deque  : "<< res_dq << " us" << std::endl;
-    
+        // if ( !is_sorted(pgm.array))
+        //     std::cout << "Array was not sorted !!!!" << std::endl;
+        // if ( !is_sorted(pgm.array_dq))
+        //     std::cout << "Deque was not sorted !!!!" << std::endl;
+        
     }
     catch(const std::exception& e)
     {

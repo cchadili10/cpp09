@@ -11,50 +11,45 @@ RPN &RPN::operator=(const RPN &other)
 
 void RPN::check_input(std::string &arg)
 {
-    bool check = true;
+
+    std::string input;
     for (size_t i = 0; i < arg.size(); i++)
     {
-        for (; i < arg.size(); i++)
+        if(!isspace(arg[i]))
+            input+=arg[i];
+    }
+    for (size_t i = 0; i < input.size(); i++)
+    {
+        if ((input[i] >= '0' && input[i] <= '9'))
         {
-            if (arg[i] == ' ' || arg[i] == '\t')
-                check = true;
-            if (arg[i] != ' ' && arg[i] != '\t')
-                break;
-        }
-        if(i == arg.size())
-            break ;
-        if ((arg[i] >= '0' && arg[i] <= '9') && (check))
-        {
-            check = false;
-            int value = arg[i] - '0';
+            int value = input[i] - '0';
             rpn.push(value);
         }
-        else if ((arg[i] == '+' || arg[i] == '-' || arg[i] == '*' || arg[i] == '/') && (check))
+        else if ((input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/'))
         {
-            check = false;
             if (rpn.size() < 2)
                  throw std::runtime_error("Error : The  operator needs two numbers, but there's only one number in the stack");
             double index;
             index = rpn.top();
             rpn.pop();
-            switch (arg[i])
+            switch (input[i])
             {
-            case ('+'):
-                rpn.top() = rpn.top() + index;
-                break;
-            case ('-'):
-                rpn.top() = rpn.top() - index;
-                break;
-            case ('*'):
-                rpn.top() = rpn.top() * index;
-                break;
-            case ('/'):
-                if (index == 0)
-                    throw std::runtime_error("Error : division by zero");
-                rpn.top() = rpn.top() / index;
-                break ;
-            default:
-                break ;
+                case ('+'):
+                    rpn.top() = rpn.top() + index;
+                    break ;
+                case ('-'):
+                    rpn.top() = rpn.top() - index;
+                    break ;
+                case ('*'):
+                    rpn.top() = rpn.top() * index;
+                    break;
+                case ('/') :
+                    if (index == 0)
+                        throw std::runtime_error("Error : division by zero");
+                    rpn.top() = rpn.top() / index;
+                    break ;
+                default:
+                    break ;
             }
         }
         else

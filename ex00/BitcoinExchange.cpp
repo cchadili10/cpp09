@@ -157,13 +157,13 @@ void BitcoinExchange::ft_checkInput(std::string line)
 {
     if (line == "date | value" || line.empty())
     {
-        if (line == "date | value" && check_data)
+        if (line == "date | value" && check_value)
             std::cout << "Error: bad input => " << line << std::endl;
         if (line == "date | value")
-            check_data = true;
+            check_value = true;
         return;
     }
-    check_data = true;
+    check_value = true;
     size_t index = line.find('|');
     if (index == std::string::npos || std::count(line.begin(), line.end(), '|') != 1)
     {
@@ -207,6 +207,12 @@ void BitcoinExchange::ft_checkInput(std::string line)
             std::cout << date << " => " << value << " = " << val << std::endl;
         }
     }
+    else if(it == bitcoin.end())
+    {
+        it--;
+        double val = it->second * value;
+        std::cout << date << " => " << value << " = " << val << std::endl;
+    }
 }
 
 void BitcoinExchange::ft_checkInput_data(std::string line)
@@ -217,13 +223,13 @@ void BitcoinExchange::ft_checkInput_data(std::string line)
 
     if (line == "date,exchange_rate" || line.empty())
     {
-        if (line == "date,exchange_rate" && check_value)
+        if (line == "date,exchange_rate" && check_data)
             throw std::runtime_error("database corrupted");
         if (line == "date,exchange_rate")
-            check_value = true;
+            check_data = true;
         return ;
     }
-    check_value = true;
+    check_data = true;
     if (index == std::string::npos || std::count(line.begin(), line.end(), ',') != 1)
         throw std::runtime_error("database corrupted");
     std::string value_st, date;
